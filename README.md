@@ -1,51 +1,109 @@
 <!---
 {
-  "depends_on": [],
+  "depends_on": ["cartesian product", "mapping", "functions"],
   "author": "Stephan Bökelmann",
-  "first_used": "2025-03-17",
-  "keywords": ["learning", "exercises", "education", "practice"]
+  "first_used": "2025-03-27",
+  "keywords": ["binary", "digital logic", "relays"]
 }
 --->
 
-# Learning Through Exercises
+# Mapping Binary Numbers onto Switches and Relays
 
 ## 1) Introduction
-Learning by doing is one of the most effective methods to acquire new knowledge and skills. Rather than passively consuming information, actively engaging in problem-solving fosters deeper understanding and long-term retention. By working through structured exercises, students can grasp complex concepts in a more intuitive and applicable way. This approach is particularly beneficial in technical fields like programming, mathematics, and engineering.
+When we think of computers and electronics, we often imagine complex circuits. But at their heart, they are systems that make decisions based on **binary input** — sequences of 0s and 1s.
 
-### 1.1) Further Readings and Other Sources
-- [The Importance of Practice in Learning](https://www.sciencedirect.com/science/article/pii/S036013151300062X)
-- "The Art of Learning" by Josh Waitzkin
-- [How to Learn Effectively: 5 Key Strategies](https://www.edutopia.org/article/5-research-backed-learning-strategies)
+Without needing any electronics background, we can think about each **input switch** as being either in state `0` (off) or `1` (on). This means each switch is a variable from the set:
+```
+{0, 1}
+```
+
+Now imagine we have **multiple switches** — for example, two or three. Then the full state of the system is described by all combinations of those switches. This is a Cartesian product of multiple `{0, 1}` sets.
+
+---
+
+### 1.0.1) One Switch, One LED
+Let’s begin simply. We have **one switch** and **one LED**. The LED turns on when the switch is ON (`1`), and turns off when the switch is OFF (`0`).
+
+We can describe this relationship as a **function**:
+```
+f: {0, 1} → {off, on}
+f(x) = if x == 1 then 'on' else 'off'
+```
+
+This simple wire between switch and LED *is the function*.
+
+Visualization:
+```
+Switch:  0   -->   LED: off
+Switch:  1   -->   LED: on
+```
+
+---
+
+### 1.0.2) Two Switches, One Relay
+Now let’s add a second switch. Each switch still has two possible states, so together they form:
+```
+{0, 1} × {0, 1} = { (0,0), (0,1), (1,0), (1,1) }
+```
+
+This is the set of all possible combinations of the two switches. We now define a function based on these inputs. For instance:
+```
+f(a, b) = 'on' if both a == 1 and b == 1, else 'off'
+```
+
+This function behaves like an **AND gate** in digital electronics.
+
+Visualization:
+```
+Switch A  Switch B  ->  LED
+   0          0         off
+   0          1         off
+   1          0         off
+   1          1         on
+```
+
+---
+
+### 1.0.3) Generalizing
+If you add a third switch, the total set of inputs becomes:
+```
+{0, 1} × {0, 1} × {0, 1} = 8 combinations
+```
+Each combination is a **tuple**, like `(1, 0, 1)`, and the function describes how this tuple is mapped to an output — like turning on a light or triggering a relay.
+
+This shows how binary inputs (the domain) and output states (the codomain) are connected via a **function**, which you can think of as the **wiring** between switches and LEDs.
+
+---
 
 ## 2) Tasks
-1. **Write a Summary**: Summarize the concept of "learning by doing" in 3-5 sentences.
-2. **Example Identification**: List three examples from your own experience where learning through exercises helped you understand a topic better.
-3. **Create an Exercise**: Design a simple exercise for a topic of your choice that someone else could use to practice.
-4. **Follow an Exercise**: Find an online tutorial that includes exercises and complete at least two of them.
-5. **Modify an Existing Exercise**: Take a basic problem from a textbook or online course and modify it to make it slightly more challenging.
-6. **Pair Learning**: Explain a concept to a partner and guide them through an exercise without giving direct answers.
-7. **Review Mistakes**: Look at an exercise you've previously completed incorrectly. Identify why the mistake happened and how to prevent it in the future.
-8. **Time Challenge**: Set a timer for 10 minutes and try to solve as many simple exercises as possible on a given topic.
-9. **Self-Assessment**: Create a checklist to evaluate your own performance in completing exercises effectively.
-10. **Reflect on Progress**: Write a short paragraph on how this structured approach to exercises has influenced your learning.
 
-<details>
-  <summary>Tip for Task 5</summary>
-  Try making small adjustments first, such as increasing the difficulty slightly or adding an extra constraint.
-</details>
+1. **Map a Single Switch to a Light**: Write down the mapping table for one switch connected to one LED, as shown above.
+
+2. **Enumerate the Cartesian Product of Two Switches**: List all 4 combinations of 2 switches. Define a function that turns the LED on *only if both are ON*.
+
+3. **Explore Your Own Logic**: Design a function for 3 switches that turns on a "lamp" in the following cases:
+   - If at least two switches are ON
+   - If the first and last switches are ON
+   - If exactly one switch is ON
+
+   Draw the corresponding truth table (all 8 combinations).
+
+---
 
 ## 3) Questions
-1. What are the main benefits of learning through exercises compared to passive learning?
-2. How do exercises improve long-term retention?
-3. Can you think of a subject where learning through exercises might be less effective? Why?
-4. What role does feedback play in learning through exercises?
-5. How can self-designed exercises improve understanding?
-6. Why is it beneficial to review past mistakes in exercises?
-7. How does explaining a concept to someone else reinforce your own understanding?
-8. What strategies can you use to stay motivated when practicing with exercises?
-9. How can timed challenges contribute to learning efficiency?
-10. How do exercises help bridge the gap between theory and practical application?
+1. Why does the total number of combinations grow as 2^n when you add more switches?
+2. In which ways can you think of the wiring between inputs and outputs as a function?
+3. How would you represent these switch states as binary numbers?
+4. Can you find a function that always maps different input states to different outputs? What kind of function is that?
 
-## 4) Advice
-Practice consistently and seek out diverse exercises that challenge different aspects of a topic. Combine exercises with reflection and feedback to maximize your learning efficiency. Don't hesitate to adapt exercises to fit your own needs and ensure that you're actively engaging with the material, rather than just going through the motions.
+---
+
+## 4) Final Advice
+Binary inputs like switches are a perfect, tangible model for understanding Cartesian products and mappings. You don’t need electronics to grasp how a function connects states of switches to outcomes like turning on a light.
+
+> Try imagining the switches as bits in a binary number, and the wiring as a simple set of rules — this is exactly how computers think.
+
+Once you’ve mastered this, everything from logic gates to programming conditions becomes much easier to understand.
+
+Want to build your own version with actual switches and LEDs? That’s just the next step.
 
